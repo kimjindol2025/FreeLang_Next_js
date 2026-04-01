@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Badge } from "@/components/ui/Badge";
 import { useEditorStore } from "@/store/editorStore";
 import { useCompile } from "@/hooks/useCompile";
@@ -14,7 +14,7 @@ export const OutputPanel: React.FC = () => {
   const currentDuration = lastResult?.duration_ms || duration_ms || 0;
   const currentStatus = lastResult?.status || "idle";
 
-  const statusStyles = {
+  const statusStyles: Record<string, "default" | "success" | "error" | "warning" | "info"> = {
     success: "success",
     error: "error",
     timeout: "warning",
@@ -48,7 +48,7 @@ export const OutputPanel: React.FC = () => {
           <div>
             {/* 상태 배지 및 실행 시간 */}
             <div className="mb-3 flex items-center gap-2">
-              <Badge variant={statusStyles[currentStatus] as any}>
+              <Badge variant={statusStyles[currentStatus] || "default"}>
                 {currentStatus === "success"
                   ? "✓ Success"
                   : currentStatus === "error"
@@ -94,7 +94,7 @@ export const OutputPanel: React.FC = () => {
                   className="bg-dark-tertiary border border-dark-border rounded p-3 text-sm"
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <Badge variant={item.status as any} size="sm">
+                    <Badge variant={item.status === "success" ? "success" : item.status === "error" ? "error" : "warning"} size="sm">
                       {item.status === "success"
                         ? "✓"
                         : item.status === "error"

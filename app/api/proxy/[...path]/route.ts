@@ -11,10 +11,11 @@ const DJANGO_API_URL =
  *
  * 사용: /api/proxy/compile/ → Django /api/compile/
  */
-export async function handler(
+async function handleRequest(
   request: NextRequest,
-  { params }: { params: { path: string[] } }
+  context: { params: { path: string[] } }
 ) {
+  const { params } = context;
   const path = params.path.join("/");
   const url = new URL(`${DJANGO_API_URL}/api/${path}`);
 
@@ -84,37 +85,44 @@ export async function handler(
 }
 
 // Next.js 13+ App Router 호환
+type RouteParams = Promise<{ path: string[] }>;
+
 export async function GET(
   request: NextRequest,
-  { params }: { params: { path: string[] } }
+  { params }: { params: RouteParams }
 ) {
-  return handler(request, { params });
+  const resolvedParams = await params;
+  return handleRequest(request, { params: resolvedParams });
 }
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { path: string[] } }
+  { params }: { params: RouteParams }
 ) {
-  return handler(request, { params });
+  const resolvedParams = await params;
+  return handleRequest(request, { params: resolvedParams });
 }
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { path: string[] } }
+  { params }: { params: RouteParams }
 ) {
-  return handler(request, { params });
+  const resolvedParams = await params;
+  return handleRequest(request, { params: resolvedParams });
 }
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { path: string[] } }
+  { params }: { params: RouteParams }
 ) {
-  return handler(request, { params });
+  const resolvedParams = await params;
+  return handleRequest(request, { params: resolvedParams });
 }
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { path: string[] } }
+  { params }: { params: RouteParams }
 ) {
-  return handler(request, { params });
+  const resolvedParams = await params;
+  return handleRequest(request, { params: resolvedParams });
 }

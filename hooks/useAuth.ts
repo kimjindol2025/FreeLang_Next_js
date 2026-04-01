@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { getApiClient, AuthResponse } from "@/lib/api";
+import { getApiClient } from "@/lib/api";
 
 export interface User {
   id: number;

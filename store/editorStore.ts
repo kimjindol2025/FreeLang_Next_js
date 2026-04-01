@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { subscribeWithSelector } from "zustand/react";
+import { subscribeWithSelector } from "zustand/middleware";
 
 export interface ExecutionResult {
   id: number;

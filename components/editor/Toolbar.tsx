@@ -25,7 +25,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({ onShare, sessionId }) => {
     try {
       await compile(code, 30);
       success("✓ 실행 완료");
-    } catch (err) {
+    } catch {
       showError("실행 실패");
     }
   }, [code, compile, success, showError]);
@@ -57,7 +57,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({ onShare, sessionId }) => {
         is_public: false,
       });
       success("✓ 스니펫이 저장되었습니다");
-    } catch (err) {
+    } catch {
       showError("저장 실패");
     } finally {
       setIsSaving(false);
@@ -81,7 +81,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({ onShare, sessionId }) => {
 
       await navigator.clipboard.writeText(shareUrl);
       success("✓ 공유 링크가 복사되었습니다");
-    } catch (err) {
+    } catch {
       showError("복사 실패");
     }
   }, [code, success, showError]);

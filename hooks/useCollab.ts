@@ -20,8 +20,8 @@ export function useCollab(sessionId?: string) {
   });
 
   const ws = useRef<ReturnType<typeof getCollabWS> | null>(null);
-  const currentSessionId = useRef<string | null>(sessionId || null);
   const lastCodeRef = useRef<string>("");
+  const [wsState, setWsState] = useState(WSState.DISCONNECTED);
 
   const {
     code,
@@ -30,7 +30,6 @@ export function useCollab(sessionId?: string) {
     setSessionId,
     setIsCollaborating,
     setRemoteCursor,
-    removeRemoteCursor,
   } = useEditorStore();
 
   // WebSocket 연결 설정
@@ -184,10 +183,17 @@ export function useCollab(sessionId?: string) {
     }
   }, [setIsCollaborating]);
 
+  // WebSocket 상태 추적
+  useEffect(() => {
+    if (ws.current) {
+      setWsState(ws.current.getState());
+    }
+  }, [state.isConnected]);
+
   return {
     ...state,
     sendCursorMove,
     disconnect,
-    wsState: ws.current?.getState() || WSState.DISCONNECTED,
+    wsState,
   };
 }
