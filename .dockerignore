@@ -1,0 +1,61 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Dependencies
+node_modules
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# Next.js
+.next
+out
+build
+dist
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*.swn
+.DS_Store
+Thumbs.db
+
+# Testing
+.test
+coverage
+.nyc_output
+
+# Development
+*.log
+logs
+
+# CI/CD
+.github
+.gitlab-ci.yml
+
+# Documentation
+README.md
+DEPLOYMENT.md
+docs
+
+# Docker
+Dockerfile
+docker-compose.yml
+docker-compose.*.yml
+.dockerignore
+
+# Other
+.editorconfig
+.prettierignore
+.eslintignore
+Makefile
+nginx.conf
