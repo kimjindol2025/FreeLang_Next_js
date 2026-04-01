@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
-import { ToastContainer } from "@/components/ui/Toast";
+import { ToastProvider } from "@/components/providers/ToastProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,9 +38,10 @@ export default function RootLayout({
         />
       </head>
       <body className="h-full bg-dark-primary text-editor-fg flex flex-col">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <ToastContainer toasts={[]} onClose={() => {}} />
+        <ToastProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+        </ToastProvider>
       </body>
     </html>
   );
